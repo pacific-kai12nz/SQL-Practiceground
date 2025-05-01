@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:15-alpine
+    command: postgres -c fsync=off -c full_page_writes=off -c synchronous_commit=off
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=sqlplayground
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --locale=C
+      - TZ=Asia/Tokyo
+
+volumes:
+  postgres:
+    driver: local
